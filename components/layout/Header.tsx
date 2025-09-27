@@ -85,8 +85,11 @@ const Header: React.FC<HeaderProps> = ({ navigate, pathname }) => {
             </div>
 
             <div
-                className={`md:hidden fixed top-0 right-0 w-2/3 h-full glass-effect p-6 transition-transform duration-300 ease-in-out ${
-                    menuOpen ? 'translate-x-0' : 'translate-x-full'
+                aria-hidden={!menuOpen}
+                className={`md:hidden fixed top-0 right-0 w-2/3 h-full glass-effect p-6 transition-transform transition-opacity duration-300 ease-in-out ${
+                    menuOpen
+                        ? 'translate-x-0 opacity-100 pointer-events-auto'
+                        : 'translate-x-full opacity-0 pointer-events-none'
                 }`}
             >
                 <div className="flex flex-col gap-6 mt-20">
