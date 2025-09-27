@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const roles = ["Trendige Gadgets", "Praktisches Zubehör", "Lifestyle-Produkte"];
+const roles = ['Trendige Gadgets', 'Praktisches Zubehör', 'Lifestyle-Produkte'];
 
 // FIX: Replaced the product image with a version that has a transparent background for better visual integration.
-const productImageUrl = "https://i.ebayimg.com/images/g/jqwAAeSwr3BoxUBb/s-l1600.webp";
+const productImageUrl = 'https://i.ebayimg.com/images/g/jqwAAeSwr3BoxUBb/s-l1600.webp';
 
 const HeroSection: React.FC = () => {
     const [currentRole, setCurrentRole] = useState(roles[0]);
@@ -13,6 +13,7 @@ const HeroSection: React.FC = () => {
         let roleIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
+        let timeoutId: number;
 
         const type = () => {
             const currentText = roles[roleIndex];
@@ -26,37 +27,42 @@ const HeroSection: React.FC = () => {
 
             if (!isDeleting && charIndex === currentText.length) {
                 isDeleting = true;
-                setTimeout(type, 2000);
+                timeoutId = window.setTimeout(type, 2000);
             } else if (isDeleting && charIndex === 0) {
                 isDeleting = false;
                 roleIndex = (roleIndex + 1) % roles.length;
-                setTimeout(type, 500);
+                timeoutId = window.setTimeout(type, 500);
             } else {
-                setTimeout(type, isDeleting ? 75 : 150);
+                timeoutId = window.setTimeout(type, isDeleting ? 75 : 150);
             }
         };
 
-        const timeoutId = setTimeout(type, 1000);
-        return () => clearTimeout(timeoutId);
+        timeoutId = window.setTimeout(type, 1000);
+        return () => window.clearTimeout(timeoutId);
     }, []);
 
-    const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const handleMouseMove = (event: React.MouseEvent<HTMLElement>) => {
         if (!heroModelRef.current) return;
-        const { clientX, clientY } = e;
+        const { clientX, clientY } = event;
         const { innerWidth, innerHeight } = window;
         const xPos = (clientX / innerWidth - 0.5) * 40;
         const yPos = (clientY / innerHeight - 0.5) * 40;
         heroModelRef.current.style.transform = `perspective(1000px) rotateY(${xPos}deg) rotateX(${-yPos}deg) scale(1.1)`;
     };
-    
+
     const handleMouseLeave = () => {
-        if(heroModelRef.current) {
-            heroModelRef.current.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)`;
+        if (heroModelRef.current) {
+            heroModelRef.current.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)';
         }
     };
 
     return (
-        <section id="home" className="section relative w-full h-screen mx-auto flex items-center" onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
+        <section
+            id="home"
+            className="section relative w-full h-screen mx-auto flex items-center"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+        >
             <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center px-6">
                 <div>
                     <div className="flex items-center gap-4 mb-4">
@@ -74,24 +80,36 @@ const HeroSection: React.FC = () => {
                         Ihr zuverlässiger Partner für sorgfältig ausgewählte Produkte, die Ihren Alltag erleichtern und bereichern.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4">
-                        <a href="https://www.ebay.de/str/optisparshop" target="_blank" rel="noopener noreferrer" className="px-8 py-3 bg-gradient-to-r from-purple-600 to-orange-500 rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300 text-center">
+                        <a
+                            href="https://www.ebay.de/str/optisparshop"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-8 py-3 bg-gradient-to-r from-purple-600 to-orange-500 rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300 text-center"
+                        >
                             Zum eBay Shop
                         </a>
-                        <a href="#contact" className="px-8 py-3 glass-effect rounded-full hover:bg-white/10 transition-all duration-300 text-center">
+                        <a
+                            href="#contact"
+                            className="px-8 py-3 glass-effect rounded-full hover:bg-white/10 transition-all duration-300 text-center"
+                        >
                             Kontakt
                         </a>
                     </div>
                 </div>
                 <div className="hidden md:block">
-                    <div ref={heroModelRef} className="relative w-full h-96 transition-transform duration-200 ease-out" style={{ transformStyle: 'preserve-3d' }}>
+                    <div
+                        ref={heroModelRef}
+                        className="relative w-full h-96 transition-transform duration-200 ease-out"
+                        style={{ transformStyle: 'preserve-3d' }}
+                    >
                         <div className="absolute inset-0 bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 rounded-full blur-3xl opacity-30 animate-[spin_20s_linear_infinite]"></div>
                         <div className="relative w-full h-full flex items-center justify-center">
-                           <img 
+                            <img
                                 src={productImageUrl}
-                                alt="Optispar Displayschutz mit Applikator" 
+                                alt="Optispar Displayschutz mit Applikator"
                                 className="w-auto h-auto max-w-xl max-h-96 object-contain animate-[float_4s_ease-in-out_infinite] drop-shadow-[0_25px_25px_rgba(145,94,255,0.25)]"
                                 style={{ transform: 'translateZ(50px)' }}
-                           />
+                            />
                         </div>
                     </div>
                 </div>
