@@ -3,6 +3,7 @@ import React from 'react';
 const productCategories = [
     {
         category: 'Schutz & Hüllen',
+        summary: 'Für Smartphones, die jeden Tag mit Ihnen unterwegs sind – robust, glasklar und stilvoll.',
         items: [
             {
                 id: 1,
@@ -15,7 +16,7 @@ const productCategories = [
             {
                 id: 2,
                 name: 'Ultradünne Silikon-Schutzhülle',
-                description: 'Flexibler und robuster Schutz, der das schlanke Design Ihres Handys bewahrt. Rutschfest und angenehm in der Hand.',
+                description: 'Flexibler Schutz, der das schlanke Design Ihres Handys bewahrt. Rutschfest und angenehm in der Hand.',
                 price: '9,99 €',
                 imageUrl: 'https://i.ebayimg.com/images/g/0~MAAOSwJjJhU7q5/s-l1600.jpg',
                 ebayUrl: 'https://www.ebay.de/str/optisparshop'
@@ -32,11 +33,12 @@ const productCategories = [
     },
     {
         category: 'Energie & Audio',
+        summary: 'Power für unterwegs und klarer Sound – kabellos, kompakt und jederzeit griffbereit.',
         items: [
             {
                 id: 3,
                 name: 'Kompakte Powerbank 10.000mAh',
-                description: 'Laden Sie Ihre Geräte unterwegs schnell und sicher auf. Kompaktes Design, passt in jede Tasche.',
+                description: 'Laden Sie Ihre Geräte unterwegs schnell auf. Kompaktes Design, passt in jede Tasche.',
                 price: '24,99 €',
                 imageUrl: 'https://i.ebayimg.com/images/g/r0gAAOSw3vliY72c/s-l1600.jpg',
                 ebayUrl: 'https://www.ebay.de/str/optisparshop'
@@ -44,7 +46,7 @@ const productCategories = [
             {
                 id: 4,
                 name: 'True Wireless Bluetooth Kopfhörer',
-                description: 'Genießen Sie kabellose Freiheit mit kristallklarem Sound und langer Akkulaufzeit. Inklusive Ladecase.',
+                description: 'Kabellose Freiheit mit kristallklarem Sound und langer Akkulaufzeit. Inklusive Ladecase.',
                 price: '39,99 €',
                 imageUrl: 'https://i.ebayimg.com/images/g/d8AAAOSwY~VjA-eS/s-l1600.jpg',
                 ebayUrl: 'https://www.ebay.de/str/optisparshop'
@@ -52,7 +54,7 @@ const productCategories = [
             {
                 id: 6,
                 name: 'USB-C Schnellladekabel (2m)',
-                description: 'Robustes, nylonummanteltes Ladekabel für schnelles Aufladen und zuverlässige Datenübertragung. Mit Knickschutz.',
+                description: 'Robustes, nylonummanteltes Ladekabel für schnelles Aufladen und zuverlässige Datenübertragung mit Knickschutz.',
                 price: '12,99 €',
                 imageUrl: 'https://i.ebayimg.com/images/g/sJIAAOSw7kpiY72d/s-l1600.jpg',
                 ebayUrl: 'https://www.ebay.de/str/optisparshop'
@@ -61,11 +63,12 @@ const productCategories = [
     },
     {
         category: 'Gadgets & Zubehör',
+        summary: 'Praktische Begleiter für Arbeit, Reise und Alltag – smart, flexibel und hochwertig verarbeitet.',
         items: [
             {
                 id: 7,
                 name: 'Magnetische Autohalterung für Lüftungsschlitz',
-                description: 'Starker Halt für Ihr Smartphone während der Fahrt. Einfache Installation und 360-Grad-Drehung für optimale Sicht.',
+                description: 'Starker Halt für Ihr Smartphone während der Fahrt. Einfache Installation und 360°-Drehung für optimale Sicht.',
                 price: '15,99 €',
                 imageUrl: 'https://i.ebayimg.com/images/g/w0sAAOSw~-hjA-eQ/s-l1600.jpg',
                 ebayUrl: 'https://www.ebay.de/str/optisparshop'
@@ -83,44 +86,65 @@ const productCategories = [
 ];
 
 const ProductCard: React.FC<{ product: (typeof productCategories)[number]['items'][number] }> = ({ product }) => (
-    <div className="glass-effect rounded-2xl p-5 flex flex-col h-full group overflow-hidden">
-        <div className="relative w-full h-56 bg-gray-900 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
-            <img src={product.imageUrl} alt={product.name} className="w-auto h-auto max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105" />
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
+        <div className="relative mb-4 flex items-center justify-center rounded-xl bg-black/30 p-6">
+            <img
+                src={product.imageUrl}
+                alt={product.name}
+                className="h-40 w-full object-contain transition-transform duration-500 group-hover:scale-105"
+            />
         </div>
-        <div className="flex flex-col flex-grow">
-            <h3 className="text-xl font-bold mb-2 text-white">{product.name}</h3>
-            <p className="text-gray-400 text-sm mb-4 flex-grow">{product.description}</p>
-            <div className="flex justify-between items-center mt-auto">
-                <p className="text-2xl font-bold gradient-text">{product.price}</p>
-                <a
-                    href={product.ebayUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-6 py-2 bg-gradient-to-r from-purple-600 to-orange-500 rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300 text-center text-sm font-semibold"
-                >
-                    Auf eBay ansehen
-                </a>
+        <div className="flex flex-col gap-3">
+            <div className="flex items-center justify-between gap-3">
+                <h3 className="text-lg font-semibold text-white leading-tight">{product.name}</h3>
+                <span className="rounded-full bg-gradient-to-r from-purple-600 to-orange-500 px-3 py-1 text-xs font-semibold">
+                    {product.price}
+                </span>
             </div>
+            <p className="text-sm text-gray-300 leading-relaxed flex-1">{product.description}</p>
+            <a
+                href={product.ebayUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-purple-300 hover:text-white transition-colors"
+            >
+                Zum Produkt
+                <span aria-hidden="true">→</span>
+            </a>
         </div>
-    </div>
+    </article>
 );
 
 const ProductsSection: React.FC = () => {
     return (
         <section id="products" className="section pt-32 md:pt-40">
-            <div className="max-w-7xl mx-auto px-6">
-                <div className="text-center mb-16">
-                    <p className="text-purple-400 mb-4 tracking-wider">UNSER SORTIMENT</p>
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6">Willkommen im Shop.</h2>
-                    <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                        Wir bieten eine sorgfältig kuratierte Auswahl an Gadgets und Zubehör, die Ihren Alltag bereichern.
+            <div className="max-w-6xl mx-auto px-6">
+                <div className="text-center space-y-4 max-w-3xl mx-auto">
+                    <span className="text-purple-300 text-sm font-semibold tracking-[0.3em] uppercase">Unser Sortiment</span>
+                    <h2 className="text-3xl md:text-4xl font-bold">Kuratierte Highlights aus dem Optispar Shop.</h2>
+                    <p className="text-gray-300 leading-relaxed">
+                        Entdecken Sie unsere Bestseller – von Displayschutz über Audio bis zu smarten Alltagshelfern. Alle Produkte sind sofort verfügbar und werden sicher über eBay verschickt.
                     </p>
                 </div>
-                <div className="space-y-16">
-                    {productCategories.map(({ category, items }) => (
-                        <div key={category}>
-                            <h3 className="text-3xl font-bold mb-8 text-white border-l-4 border-purple-500 pl-4">{category}</h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <div className="mt-14 space-y-16">
+                    {productCategories.map(({ category, summary, items }) => (
+                        <div key={category} className="space-y-6">
+                            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+                                <div>
+                                    <h3 className="text-2xl font-semibold text-white">{category}</h3>
+                                    <p className="mt-2 text-sm text-gray-400 max-w-2xl">{summary}</p>
+                                </div>
+                                <a
+                                    href="https://www.ebay.de/str/optisparshop"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 text-sm font-semibold text-purple-300 hover:text-white transition-colors"
+                                >
+                                    Alle Artikel ansehen
+                                    <span aria-hidden="true">↗</span>
+                                </a>
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {items.map((product) => (
                                     <ProductCard key={product.id} product={product} />
                                 ))}
