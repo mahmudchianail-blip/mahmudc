@@ -21,9 +21,9 @@ const StarsCanvas: React.FC = () => {
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         currentCanvas.appendChild(renderer.domElement);
-        
+
         const starsGeometry = new THREE.BufferGeometry();
-        const starsVertices = [];
+        const starsVertices: number[] = [];
         for (let i = 0; i < 5000; i++) {
             const x = (Math.random() - 0.5) * 2000;
             const y = (Math.random() - 0.5) * 2000;
@@ -68,13 +68,13 @@ const StarsCanvas: React.FC = () => {
             if (currentCanvas && renderer.domElement.parentElement) {
                 currentCanvas.removeChild(renderer.domElement);
             }
+            starsGeometry.dispose();
+            starsMaterial.dispose();
+            renderer.dispose();
         };
     }, []);
 
-    return (
-        <div ref={canvasRef} className="w-full h-auto fixed inset-0 z-[-1] pointer-events-none" />
-    );
+    return <div ref={canvasRef} className="w-full h-auto fixed inset-0 z-[-1] pointer-events-none" />;
 };
-
 
 export default StarsCanvas;

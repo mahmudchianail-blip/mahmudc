@@ -17,7 +17,7 @@ const ImprintSection: React.FC = () => {
                         <h3 className="text-xl font-bold text-white mb-2">Unternehmensname</h3>
                         <p>Optispar GbR</p>
                     </div>
-                     <div>
+                    <div>
                         <h3 className="text-xl font-bold text-white mb-2">Geschäftsführung</h3>
                         <p>Mahmud Chia Nail, Rajab Alhaj</p>
                     </div>
@@ -27,21 +27,30 @@ const ImprintSection: React.FC = () => {
                     </div>
                     <div>
                         <h3 className="text-xl font-bold text-white mb-2">Kontakt</h3>
-                        <p><strong>Telefon:</strong> +49 17620729015</p>
-                        <p><strong>E-Mail:</strong> Optispar@gmail.com</p>
+                        <p>
+                            <strong>Telefon:</strong> +49 17620729015
+                        </p>
+                        <p>
+                            <strong>E-Mail:</strong> Optispar@gmail.com
+                        </p>
                     </div>
                     <div>
                         <h3 className="text-xl font-bold text-white mb-2">Umsatzsteuer-Identifikationsnummer</h3>
                         <p>USt-IdNr. DE 450378963</p>
                     </div>
-                     <div>
+                    <div>
                         <h3 className="text-xl font-bold text-white mb-2">Wichtiger Hinweis</h3>
                         <p>Wir arbeiten nach der Kleinunternehmerregelung (§ 19 UStG). Die Umsatzsteuer wird auf der Rechnung mit 0 % ausgewiesen.</p>
                     </div>
-                     <div>
+                    <div>
                         <h3 className="text-xl font-bold text-white mb-2">Verkäuferprofil</h3>
                         <p>
-                            <a href="https://www.ebay.de/str/optisparshop" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:text-white transition-colors">
+                            <a
+                                href="https://www.ebay.de/str/optisparshop"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-purple-400 hover:text-white transition-colors"
+                            >
                                 optispar-shop auf eBay
                             </a>
                             <span className="ml-2 text-sm bg-green-500/20 text-green-300 px-2 py-1 rounded">Verkäufer mit Top-Bewertung</span>
