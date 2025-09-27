@@ -102,7 +102,7 @@ const HeroSection: React.FC = () => {
                         className="relative w-full h-96 transition-transform duration-200 ease-out"
                         style={{ transformStyle: 'preserve-3d' }}
                     >
-                        <div className="absolute inset-0 bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 rounded-full blur-3xl opacity-30 animate-[spin_20s_linear_infinite]"></div>
+                        <div className="pointer-events-none absolute inset-0 rounded-full opacity-20 bg-[radial-gradient(circle_at_center,_rgba(145,94,255,0.45),_transparent_65%)]"></div>
                         <div className="relative w-full h-full flex items-center justify-center">
                             <img
                                 src={productImageUrl}
