@@ -1,38 +1,72 @@
 import React from 'react';
 
-const services = [
-    { title: 'Sorgfältig ausgewählt', icon: '🎯', description: 'Jedes Produkt wird auf Funktion, Design und Alltagstauglichkeit geprüft.', gradient: 'from-blue-500 to-purple-500' },
-    { title: 'Bester Service', icon: '💬', description: 'Wir antworten meist innerhalb einer Stunde auf Ihre Anliegen.', gradient: 'from-green-500 to-blue-500' },
-    { title: 'Faire Preise', icon: '💰', description: 'Wir versprechen Alltagserleichterung, Stil und faire Preise.', gradient: 'from-orange-500 to-red-500' },
-    { title: 'Blitzversand', icon: '🚀', description: 'Ihre Bestellung schnell und zuverlässig bei Ihnen.', gradient: 'from-pink-500 to-purple-500' }
+const pillars = [
+    {
+        title: 'Handverlesen & geprüft',
+        description: 'Wir testen jedes Produkt persönlich und wählen nur Artikel aus, die wir selbst gern nutzen würden.',
+        icon: '🧪',
+        accent: 'from-purple-500/80 to-purple-400/40'
+    },
+    {
+        title: 'Ehrliche Preise',
+        description: 'Faire Konditionen ohne versteckte Kosten. Unsere Kund:innen zahlen nur für echte Qualität.',
+        icon: '💶',
+        accent: 'from-orange-500/80 to-orange-400/40'
+    },
+    {
+        title: 'Sofort versandbereit',
+        description: 'Bestellungen verlassen unser Lager blitzschnell – damit Ihre neuen Favoriten schnell ankommen.',
+        icon: '🚀',
+        accent: 'from-blue-500/80 to-sky-400/40'
+    },
+    {
+        title: 'Support per Du',
+        description: 'Kurze Wege, schnelle Antworten. Wir sind persönlich für Ihre Fragen da – meist innerhalb einer Stunde.',
+        icon: '💬',
+        accent: 'from-green-500/80 to-emerald-400/40'
+    }
 ];
 
-const ServiceCard: React.FC<{ service: (typeof services)[number] }> = ({ service }) => (
-    <div className="glass-effect p-6 rounded-2xl text-center group transition-all duration-300 hover:transform hover:-translate-y-2 cursor-pointer">
-        <div className={`w-20 h-20 mx-auto mb-4 bg-gradient-to-br ${service.gradient} rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110`}>
-            <span className="text-3xl">{service.icon}</span>
-        </div>
-        <h3 className="text-xl font-bold mb-2">{service.title}</h3>
-        <p className="text-gray-400">{service.description}</p>
-    </div>
-);
+const coreValues = ['Nachhaltige Auswahl', 'Käuferschutz dank eBay', 'Über 1.200 positive Bewertungen'];
 
 const AboutSection: React.FC = () => {
     return (
-        <section id="about" className="section">
-            <div className="max-w-7xl mx-auto px-6">
-                <div className="text-center mb-12">
-                    <p className="text-purple-400 mb-4 tracking-wider">WARUM OPTISPAR?</p>
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6">Ihr zuverlässiger Partner.</h2>
-                    <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                        Willkommen bei Optispar GbR, Ihrem zuverlässigen Partner für trendige Gadgets, praktisches Zubehör und nachhaltige Lifestyle-Produkte.
-                        Jedes Produkt wird sorgfältig geprüft, um Ihnen echten Mehrwert zu bieten.
-                    </p>
-                </div>
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {services.map((service, index) => (
-                        <ServiceCard key={index} service={service} />
-                    ))}
+        <section id="about" className="section relative overflow-hidden">
+            <div className="absolute inset-0 -z-10 opacity-40">
+                <div className="absolute right-0 top-10 h-48 w-48 rounded-full bg-gradient-to-br from-purple-500/40 to-orange-400/40 blur-3xl" />
+            </div>
+            <div className="max-w-6xl mx-auto px-6">
+                <div className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] items-start">
+                    <div className="space-y-6">
+                        <span className="text-purple-300 text-sm font-semibold tracking-[0.3em] uppercase">Optispar in Kürze</span>
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
+                            Warum Kund:innen uns ihr Vertrauen schenken.
+                        </h2>
+                        <p className="text-lg text-gray-300 leading-relaxed">
+                            Optispar GbR steht für sorgsam ausgewählte Technik- und Lifestyle-Produkte, die halten, was sie versprechen. Wir kombinieren ein modernes Sortiment mit persönlichem Service und liefern Inspiration für Ihren Alltag.
+                        </p>
+                        <div className="flex flex-wrap gap-3">
+                            {coreValues.map((value) => (
+                                <span key={value} className="glass-effect rounded-full px-4 py-2 text-sm text-gray-200">
+                                    {value}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="grid sm:grid-cols-2 gap-6">
+                        {pillars.map((pillar) => (
+                            <div key={pillar.title} className="group relative overflow-hidden rounded-2xl border border-white/10 p-6">
+                                <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br ${pillar.accent}`} aria-hidden="true" />
+                                <div className="relative space-y-4">
+                                    <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-2xl">
+                                        {pillar.icon}
+                                    </div>
+                                    <h3 className="text-xl font-semibold">{pillar.title}</h3>
+                                    <p className="text-sm text-gray-300 leading-relaxed">{pillar.description}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>

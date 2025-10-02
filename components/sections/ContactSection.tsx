@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-const contactDetails = [
-    { type: 'Email', value: 'Optispar@gmail.com', icon: '📧', color: 'bg-purple-500' },
-    { type: 'Standort', value: 'Wuppertal, Deutschland', icon: '📍', color: 'bg-orange-500' },
-    { type: 'Antwortzeit', value: 'Innerhalb 1 Stunde', icon: '💬', color: 'bg-green-500' }
+const contactMethods = [
+    { label: 'E-Mail', value: 'Optispar@gmail.com', icon: '📧', hint: 'Wir melden uns werktags in unter einer Stunde.' },
+    { label: 'Telefon', value: '+49 176 20729015', icon: '📞', hint: 'Mo–Fr, 9 – 18 Uhr' },
+    { label: 'Standort', value: 'Wuppertal, Deutschland', icon: '📍', hint: 'Versand direkt aus NRW' }
 ];
 
 const ContactSection: React.FC = () => {
@@ -17,7 +17,7 @@ const ContactSection: React.FC = () => {
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         setStatus('sending');
-        // Simulate form submission
+
         window.setTimeout(() => {
             setStatus('success');
             setFormState({ name: '', email: '', message: '' });
@@ -26,98 +26,103 @@ const ContactSection: React.FC = () => {
     };
 
     return (
-        <section id="contact" className="section">
-            <div className="max-w-7xl mx-auto px-6">
-                <div className="grid lg:grid-cols-2 gap-12">
-                    <div className="flex flex-col justify-center">
-                        <p className="text-purple-400 mb-4 tracking-wider">KONTAKT AUFNEHMEN</p>
-                        <h2 className="text-4xl md:text-5xl font-bold mb-6">Haben Sie Fragen?</h2>
-                        <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-                            Haben Sie eine Frage zu einem Produkt oder Ihrer Bestellung? Schreiben Sie uns eine Nachricht und wir melden uns so schnell wie möglich bei Ihnen!
-                        </p>
-                        <div className="space-y-4 mb-8">
-                            {contactDetails.map((detail) => (
-                                <div key={detail.type} className="flex items-center gap-4">
-                                    <div className={`w-12 h-12 ${detail.color} bg-opacity-20 rounded-full flex items-center justify-center`}>
-                                        <span className="text-xl">{detail.icon}</span>
-                                    </div>
+        <section id="contact" className="section relative overflow-hidden">
+            <div className="absolute inset-0 -z-10">
+                <div className="absolute right-10 top-20 h-48 w-48 rounded-full bg-orange-500/20 blur-3xl" />
+            </div>
+            <div className="max-w-6xl mx-auto px-6">
+                <div className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)]">
+                    <div className="space-y-8">
+                        <div className="space-y-4">
+                            <span className="text-purple-300 text-sm font-semibold tracking-[0.3em] uppercase">Kontakt</span>
+                            <h2 className="text-3xl md:text-4xl font-bold">Wir sind nur eine Nachricht entfernt.</h2>
+                            <p className="text-gray-300 leading-relaxed max-w-xl">
+                                Haben Sie Fragen zu einem Produkt, einer Bestellung oder wünschen eine persönliche Beratung? Schreiben Sie uns – wir freuen uns, von Ihnen zu hören.
+                            </p>
+                        </div>
+                        <div className="space-y-4">
+                            {contactMethods.map((method) => (
+                                <div key={method.label} className="glass-effect rounded-2xl p-4 flex items-start gap-4">
+                                    <div className="text-2xl">{method.icon}</div>
                                     <div>
-                                        <p className="text-sm text-gray-400">{detail.type}</p>
-                                        <p className="text-white font-medium">{detail.value}</p>
+                                        <p className="text-sm uppercase tracking-wide text-purple-300">{method.label}</p>
+                                        <p className="text-lg font-semibold text-white">{method.value}</p>
+                                        <p className="text-sm text-gray-400">{method.hint}</p>
                                     </div>
                                 </div>
                             ))}
                         </div>
-                        <div className="flex gap-4">
-                            <a
-                                href="https://www.ebay.de/str/optisparshop"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-12 h-12 glass-effect rounded-full flex items-center justify-center hover:bg-red-500 transition-all duration-300 text-2xl"
-                                aria-label="eBay Shop besuchen"
-                            >
-                                🛒
-                            </a>
-                            <p className="self-center text-gray-300">Besuchen Sie unseren Shop auf eBay</p>
-                        </div>
+                        <a
+                            href="https://www.ebay.de/str/optisparshop"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-3 rounded-full border border-white/20 px-5 py-3 text-sm font-semibold text-gray-200 hover:bg-white/10 transition-colors"
+                        >
+                            🛒 Zum eBay-Shop wechseln
+                        </a>
                     </div>
-
-                    <div className="glass-effect p-8 rounded-2xl">
+                    <div className="glass-effect rounded-3xl p-8 md:p-10">
                         <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-                            <div>
-                                <label htmlFor="name" className="block text-sm mb-2 text-gray-300">
-                                    Name
-                                </label>
-                                <input
-                                    id="name"
-                                    name="name"
-                                    type="text"
-                                    value={formState.name}
-                                    onChange={handleChange}
-                                    className="contact-input w-full px-4 py-3 rounded-lg text-white focus:ring-2 focus:ring-purple-500"
-                                    placeholder="Ihr Name"
-                                    required
-                                />
+                            <div className="grid gap-4 md:grid-cols-2">
+                                <div className="flex flex-col gap-2">
+                                    <label htmlFor="name" className="text-sm text-gray-300">
+                                        Name
+                                    </label>
+                                    <input
+                                        id="name"
+                                        name="name"
+                                        type="text"
+                                        value={formState.name}
+                                        onChange={handleChange}
+                                        className="contact-input w-full rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-purple-500/60"
+                                        placeholder="Ihr Name"
+                                        required
+                                    />
+                                </div>
+                                <div className="flex flex-col gap-2">
+                                    <label htmlFor="email" className="text-sm text-gray-300">
+                                        E-Mail
+                                    </label>
+                                    <input
+                                        id="email"
+                                        name="email"
+                                        type="email"
+                                        value={formState.email}
+                                        onChange={handleChange}
+                                        className="contact-input w-full rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-purple-500/60"
+                                        placeholder="ihre.email@example.com"
+                                        required
+                                    />
+                                </div>
                             </div>
-                            <div>
-                                <label htmlFor="email" className="block text-sm mb-2 text-gray-300">
-                                    Email
-                                </label>
-                                <input
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    value={formState.email}
-                                    onChange={handleChange}
-                                    className="contact-input w-full px-4 py-3 rounded-lg text-white focus:ring-2 focus:ring-purple-500"
-                                    placeholder="ihre.email@example.com"
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="message" className="block text-sm mb-2 text-gray-300">
+                            <div className="flex flex-col gap-2">
+                                <label htmlFor="message" className="text-sm text-gray-300">
                                     Nachricht
                                 </label>
                                 <textarea
                                     id="message"
                                     name="message"
-                                    rows={5}
+                                    rows={6}
                                     value={formState.message}
                                     onChange={handleChange}
-                                    className="contact-input w-full px-4 py-3 rounded-lg text-white focus:ring-2 focus:ring-purple-500"
-                                    placeholder="Ihre Frage oder Ihr Anliegen..."
+                                    className="contact-input w-full rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-purple-500/60"
+                                    placeholder="Wie können wir helfen?"
                                     required
                                 ></textarea>
                             </div>
                             <button
                                 type="submit"
-                                className="submit-btn w-full py-3 rounded-lg font-bold text-white disabled:opacity-50"
+                                className="submit-btn w-full rounded-xl py-3 font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60"
                                 disabled={status === 'sending'}
                             >
-                                {status === 'sending' ? 'Senden...' : 'Nachricht senden'}
+                                {status === 'sending' ? 'Wird gesendet…' : 'Nachricht senden'}
                             </button>
                         </form>
-                        {status === 'success' && <div className="mt-4 text-center text-green-400">Nachricht erfolgreich gesendet! ✅</div>}
+                        {status === 'success' && (
+                            <div className="mt-6 rounded-2xl bg-green-500/10 px-4 py-3 text-sm text-green-300">
+                                Danke für Ihre Nachricht! Wir melden uns in Kürze.
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
